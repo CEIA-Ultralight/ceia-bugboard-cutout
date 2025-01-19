@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from workflow2 import workImage
+from workflow import workImage
 
 app = Flask(__name__)
 
