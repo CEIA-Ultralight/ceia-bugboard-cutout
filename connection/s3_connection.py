@@ -26,6 +26,7 @@ class S3Connection:
                                                         Params={'Bucket': bucket, 'Key': object_key},
                                                         ExpiresIn=300)
             print(f"URL gerada com sucesso: {url_pre_assinada}")
+            return url_pre_assinada
 
         except Exception as e:
             print(f"Erro ao gerar a URL: {e}")
