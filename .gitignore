@@ -1,2 +1,7 @@
 *.pyc 
 .DS_Store
+images/
+output/
+recorte-placas-env/
+photos/
+processed_photos/

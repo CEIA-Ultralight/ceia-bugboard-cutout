@@ -94,7 +94,6 @@ class DocScanner(object):
         to be rescaled and Canny filtered prior to be passed in.
         """
         lines = lsd(img)
-
         # massages the output from LSD
         # LSD operates on edges. One "line" has 2 edges, and so we need to combine the edges back into lines
         # 1. separate out the lines into horizontal and vertical lines.
@@ -159,6 +158,11 @@ class DocScanner(object):
         # remove corners in close proximity
         corners = self.filter_corners(corners)
         return corners
+
+
+
+
+
 
     def is_valid_contour(self, cnt, IM_WIDTH, IM_HEIGHT):
         """Returns True if the contour satisfies all requirements set at instantitation"""
@@ -266,7 +270,8 @@ class DocScanner(object):
     def scan(self, image_path):
 
         RESCALED_HEIGHT = 500.0
-        OUTPUT_DIR = 'output'
+        # OUTPUT_DIR = 'output'
+        OUTPUT_DIR = 'processed_photos'
 
         # load the image and compute the ratio of the old height
         # to the new height, clone it, and resize it
@@ -287,23 +292,13 @@ class DocScanner(object):
         # apply the perspective transformation
         warped = transform.four_point_transform(orig, screenCnt * ratio)
 
-        # convert the warped image to grayscale
-        gray = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
-
-        # sharpen image
-        sharpen = cv2.GaussianBlur(gray, (0,0), 3)
-        sharpen = cv2.addWeighted(gray, 1.5, sharpen, -0.5, 0)
-
-        # apply adaptive threshold to get black and white effect
-        thresh = cv2.adaptiveThreshold(sharpen, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 21, 15)
-
         # save the transformed image
         basename = os.path.basename(image_path)
-        cv2.imwrite(OUTPUT_DIR + '/' + basename, thresh)
+        cv2.imwrite(OUTPUT_DIR + '/' + basename, warped)
         print("Proccessed " + basename)
 
 
-if __name__ == "__main__":
+def main(args):
     ap = argparse.ArgumentParser()
     group = ap.add_mutually_exclusive_group(required=True)
     group.add_argument("--images", help="Directory of images to be scanned")
@@ -311,7 +306,7 @@ if __name__ == "__main__":
     ap.add_argument("-i", action='store_true',
         help = "Flag for manually verifying and/or setting document corners")
 
-    args = vars(ap.parse_args())
+    args = vars(ap.parse_args(args))
     im_dir = args["images"]
     im_file_path = args["image"]
     interactive_mode = args["i"]
@@ -331,3 +326,7 @@ if __name__ == "__main__":
         im_files = [f for f in os.listdir(im_dir) if get_ext(f) in valid_formats]
         for im in im_files:
             scanner.scan(im_dir + '/' + im)
+
+if __name__ == "__main__":
+    import sys
+    main(sys.argv[1:])
