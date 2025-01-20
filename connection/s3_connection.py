@@ -4,7 +4,12 @@ from botocore.exceptions import NoCredentialsError
 class S3Connection:
     
     def __init__(self):
-        self.client = boto3.client('s3')
+        self.client = s3 = boto3.client(
+                                service_name='s3',
+                                region_name='us-east-2',
+                                aws_access_key_id='',
+                                aws_secret_access_key=''
+)
         print("Conexão com o S3 estabelecida com sucesso!")
 
     def upload_to_s3(self, file_directory, object_name, bucket="imagens-ultralight"):
