@@ -32,7 +32,7 @@ def workImage(photo_url, trap_id, user_id, status):
 
 # Processar a imagem localmente
 
-    scan.main(["--image", f"photos\\{image_name}"])
+    scan.main(["--image", f"photos/{image_name}"])
 
 # Publicar no S3
 
@@ -40,7 +40,7 @@ def workImage(photo_url, trap_id, user_id, status):
 
     processed_image = image_name.replace(".jpg", "_processed.jpg")
 
-    s3.upload_to_s3(f"processed_photos\\{image_name}", processed_image)
+    s3.upload_to_s3(f"processed_photos/{image_name}", processed_image)
 
 ## Obter o URL da imagem no S3
 
