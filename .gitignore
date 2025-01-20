@@ -6,3 +6,6 @@ recorte-placas-env/
 photos/
 processed_photos/
 python-image/
+Dockerfile
+.dockerignore
+recorte-placas.tar
