@@ -22,4 +22,4 @@ def create_procimage():
     return jsonify(data), 201
 
 if __name__ == "__main__":
-    app.run(debug = True) 
+    app.run(host="0.0.0.0", debug = True) 
