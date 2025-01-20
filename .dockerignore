@@ -1,0 +1,47 @@
+# Ignorar arquivos e diretórios irrelevantes
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.log
+*.tmp
+*.swp
+
+# Ignorar arquivos de controle de versão
+.git/
+*.gitignore
+
+# Ignorar ambientes virtuais e pacotes locais
+.env/
+*.env
+*.tar
+*.zip
+*.rar
+recorte-placas-env/
+
+# Ignorar imagens e arquivos grandes
+*.jpg
+*.png
+photos/
+processed_photos/
+
+# Ignorar outros arquivos desnecessários
+*.tar
+*.bak
+*.old
+*.DS_Store
+*.idea
+*.vscode
+
+# Incluir arquivos essenciais explicitamente
+!Dockerfile
+!requirements.txt
+!imageProcAPI.py
+!workflow.py
+!scan.py
+!teste.py
+
+# Incluir pastas essenciais explicitamente
+!connection/
+!pyimagesearch/
+!utils/
