@@ -11,7 +11,6 @@ from pyimagesearch import transform
 from pyimagesearch import imutils
 from scipy.spatial import distance as dist
 from matplotlib.patches import Polygon
-import polygon_interacter as poly_i
 import numpy as np
 import matplotlib.pyplot as plt
 import itertools
@@ -252,20 +251,6 @@ class DocScanner(object):
             screenCnt = max(approx_contours, key=cv2.contourArea)
             
         return screenCnt.reshape(4, 2)
-
-    def interactive_get_contour(self, screenCnt, rescaled_image):
-        poly = Polygon(screenCnt, animated=True, fill=False, color="yellow", linewidth=5)
-        fig, ax = plt.subplots()
-        ax.add_patch(poly)
-        ax.set_title(('Drag the corners of the box to the corners of the document. \n'
-            'Close the window when finished.'))
-        p = poly_i.PolygonInteractor(ax, poly)
-        plt.imshow(rescaled_image)
-        plt.show()
-
-        new_points = p.get_poly_points()[:4]
-        new_points = np.array([[p] for p in new_points], dtype = "int32")
-        return new_points.reshape(4, 2)
 
     def scan(self, image_path):
 
