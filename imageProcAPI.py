@@ -21,7 +21,7 @@ def process_next_image():
             print(f"Processando imagem: {image_name}")
 
             # Processa a imagem e obtém os dados da imagem no bucket
-            processed_image_data = workImage(image_data["photo_url"], image_name)
+            processed_image_data = workImage(image_data["image_url"], image_name)
             processed_images[image_name] = processed_image_data
 
             processing = False
