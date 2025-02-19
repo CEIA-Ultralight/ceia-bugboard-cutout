@@ -280,7 +280,7 @@ class DocScanner(object):
         # save the transformed image
         basename = os.path.basename(image_path)
         cv2.imwrite(OUTPUT_DIR + '/' + basename, warped)
-        print("Proccessed " + basename)
+        return OUTPUT_DIR + '/' + basename
 
 
 def main(args):
@@ -304,7 +304,7 @@ def main(args):
 
     # Scan single image specified by command line argument --image <IMAGE_PATH>
     if im_file_path:
-        scanner.scan(im_file_path)
+        return scanner.scan(im_file_path)
 
     # Scan all valid images in directory specified by command line argument --images <IMAGE_DIR>
     else:
