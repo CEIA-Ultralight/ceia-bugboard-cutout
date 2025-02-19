@@ -1,0 +1,14 @@
+version: '3.8'  # Versão do Docker Compose
+
+services:
+  flask_app:  # Nome do serviço (pode ser qualquer nome)
+    build: .  # Indica que o Dockerfile está no diretório atual
+    container_name: flask_container  # Nome do contêiner (opcional)
+    ports:
+      - "5000:5000"  # Mapeia a porta 5000 do contêiner para a porta 5000 do host
+    environment:
+      - FLASK_APP=imageProcAPI.py  # Define a variável de ambiente FLASK_APP
+      - FLASK_RUN_HOST=0.0.0.0     # Define a variável de ambiente FLASK_RUN_HOST
+    volumes:
+      - .:/app  # Monta o diretório atual do host no diretório /app do contêiner (útil para desenvolvimento)
+    restart: unless-stopped  # Reinicia o contêiner automaticamente, a menos que seja parado manualmente
