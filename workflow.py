@@ -1,9 +1,10 @@
 from connection.supabase_connection import SupabaseConnection
 import utils.utils as utils
 import scan
+import connection.patch as patch
 
 # Baixar a imagem localmente
-def workImage(photo_url, image_name):
+def workImage(photo_url, image_name, image_id):
 
     image_path = utils.download_image_temp(photo_url, image_name)
 
@@ -15,6 +16,6 @@ def workImage(photo_url, image_name):
 
     data = bucket.upload_file_to_supabase(image_name, processed_path)
 
-    utils.delete_temp_file(processed_path)
+    patch.patch(image_id, data["url"])
 
-    return data
+    utils.delete_temp_file(processed_path)
