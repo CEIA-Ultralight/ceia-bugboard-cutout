@@ -1,14 +1,13 @@
 version: '3.8'  # Versão do Docker Compose
 
 services:
-  flask_app:  # Nome do serviço (pode ser qualquer nome)
+  fastapi_app:  # Nome do serviço atualizado para refletir FastAPI
     build: .  # Indica que o Dockerfile está no diretório atual
-    container_name: flask_container  # Nome do contêiner (opcional)
+    container_name: fastapi_container  # Nome do contêiner
     ports:
-      - "5000:5000"  # Mapeia a porta 5000 do contêiner para a porta 5000 do host
+      - "8011:8011"
     environment:
-      - FLASK_APP=imageProcAPI.py  # Define a variável de ambiente FLASK_APP
-      - FLASK_RUN_HOST=0.0.0.0     # Define a variável de ambiente FLASK_RUN_HOST
+      - UVICORN_CMD=uvicorn app:app --host 0.0.0.0 --port 8011 --reload  # Comando para rodar o servidor
     volumes:
-      - .:/app  # Monta o diretório atual do host no diretório /app do contêiner (útil para desenvolvimento)
+      - .:/app  # Monta o diretório atual no contêiner para desenvolvimento
     restart: unless-stopped  # Reinicia o contêiner automaticamente, a menos que seja parado manualmente

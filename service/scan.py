@@ -7,8 +7,8 @@
 
 # Scanned images will be output to directory named 'output'
 
-from pyimagesearch import transform
-from pyimagesearch import imutils
+from service.utils import transform
+from service.utils import imutils
 from scipy.spatial import distance as dist
 from matplotlib.patches import Polygon
 import numpy as np
